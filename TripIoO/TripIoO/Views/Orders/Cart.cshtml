@@ -1,0 +1,128 @@
+﻿@model CartViewModel
+
+<!-- breadcrumb start -->
+<div class="breadcrumb-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="page-title">
+                    <h2>cart</h2>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <nav aria-label="breadcrumb" class="theme-breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li class="breadcrumb-item active">cart</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- breadcrumb End -->
+<!--section start-->
+<section class="cart-section section-b-space">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+               
+                @if (Model != null)
+                {
+                    <table class="table cart-table table-responsive-xs">
+                        <thead>
+                            <tr class="table-head">
+                                <th scope="col">Cover</th>
+                                <th scope="col">Trip Name</th>
+                                <th scope="col">Trip Price</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+
+
+                        @foreach (var trip in Model.TripList)
+                        {
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <a href="#"><img src="~/images/trip/@trip.Cover" alt=""></a>
+                                    </td>
+                                    <td>
+                                        <a asp-controller="Home" asp-action="Details" asp-route-tripId="@trip.TripId"><h4>@trip.TripName</h4></a>
+
+                                    </td>
+                                    <td>
+                                        <h2><span>$</span>@trip.Price</h2>
+                                    </td>
+
+                                    <td>
+                                        <a href="javascript:;" id="ic-delete" data-id="@trip.TripId" class="icon btn btn-danger-gradien">
+                                            <i class="ti-close"></i>
+                                        </a>
+                                        <input type="hidden" value="@trip.quty" />
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+                        }
+
+
+
+                    </table>
+                    <table class="table cart-table table-responsive-md">
+                        <tfoot>
+                            <tr>
+                                <td>total price :</td>
+                                <td>
+                                    <h2><span>$</span>@Model.Total</h2>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                }
+                else
+                {
+                    <table class="table cart-table table-responsive-xs">
+                        <thead>
+                            <tr class="table-head">
+                                <th scope="col">Cover</th>
+                                <th scope="col">Trip Name</th>
+                                <th scope="col">Trip Price</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        }
+
+                    </table>
+                    <table class="table cart-table table-responsive-md">
+                        <tfoot>
+                            <tr>
+                                <td>total price :</td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                }
+            </div>
+        </div>
+        <div class="row cart-buttons">
+            <div class="col-6"><a asp-controller="Home" asp-action="Index" class="btn btn-solid">continue booking</a></div>
+            <div class="col-6"><a href="/Orders/OrderSuccess" class="btn btn-solid">check out</a></div>
+        </div>
+    </div>
+</section>
+<!--section end-->
+@section Scripts
+    {
+    <script src="~/js/gamed-index-delete.js" asp-append-version="true"></script>
+
+}

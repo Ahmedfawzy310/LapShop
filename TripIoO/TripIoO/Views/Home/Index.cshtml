@@ -1,0 +1,217 @@
+﻿@model HomePageViewModel
+
+
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+<section class="pt-0 padding-bottom-cls">
+    <div class="slide-1 home-slider">
+       
+        @foreach(var slide in Model.Sliders)
+        {
+            <div>
+                <div class="home">
+                    <img src="~/images/trip/homeslider/@slide.ImageName" alt="" class="bg-img blur-up lazyload">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <div class="slider-contain">
+                                    <div>
+                                        <h4>save 30%</h4>
+                                        <h1>Trips</h1><a href="#" class="btn btn-outline btn-classic">
+                                            book
+                                            now
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</section>
+<div class="layout-8-bg">
+
+
+    <!-- collection banner -->
+    <section class="banner-goggles ratio2_3">
+        <div class="container-fluid">
+            <div class="row partition3">
+              
+                @foreach(var category in Model.Categories)
+                {
+                    <div class="col-md-4">
+                        <a href="#">
+                            <div class="collection-banner">
+                                <div class="img-part">
+                                    <img src="~/images/trip/category/@category.Image"
+                                         class="img-fluid blur-up lazyload bg-img" alt="">
+                                </div>
+                                <div class="contain-banner banner-3">
+                                    <div>
+                                        <h4>50% off</h4>
+                                        <h2>@category.Name</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </section>
+    <!-- collection banner end -->
+    <!-- slider tab  -->
+    <section class="section-b-space ratio_square">
+        <div class="container-fluid">
+            <div class="title2">
+                <h4>new collection</h4>
+                <h2 class="title-inner2">trending products</h2>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="theme-tab layout7-product">
+                        <ul class="tabs tab-title">
+                            <li id="features" class="current"><a href="tab-1">featured</a></li>
+                            <li id="new" class=""><a href="tab-2">new arrival</a></li>
+                            <li id="special" class=""><a href="tab-3">special</a></li>
+                        </ul>
+                        <div class="tab-content-cls">
+                            <div id="tab-1" class="tab-content active default">
+                                <div class="row no-slider">
+                                   
+                                    @foreach(var trip in Model.Trips)
+                                    {
+                                        <div class="product-box">
+                                            <div class="img-wrapper">
+                                                <div class="front">
+                                                    <a asp-action="About" asp-route-id="@trip.Id">
+                                                        <img src="~/images/trip/@trip.Cover"
+                                                             class="img-fluid blur-up lazyload bg-img" alt="">
+                                                    </a>
+                                                </div>
+                                                <div class="cart-info cart-wrap ">
+                                                    <a asp-controller="Orders" asp-action="AddToCart" asp-route-tripId="@trip.Id"
+                                                            title="Add to cart">
+                                                        <i class="ti-shopping-cart"></i>
+                                                    </a> <a href="javascript:void(0)" title="Add to Wishlist">
+                                                        <i class="ti-heart" aria-hidden="true"></i>
+                                                    </a> <a href="#"
+                                                            data-toggle="modal" data-target="#quick-view"
+                                                            title="Quick View">
+                                                        <i class="ti-search"
+                                                           aria-hidden="true"></i>
+                                                    </a> <a href="compare.html"
+                                                            title="Compare">
+                                                        <i class="ti-reload"
+                                                           aria-hidden="true"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="details-product">
+                                                <a asp-action="About" asp-route-id="@trip.Id">
+                                                    
+                                                    <h6 class="text-light">@trip.Name</h6>
+                                                </a>
+                                                <h4 class="text-light">$@trip.PurchesPrice <del class="text-danger">$@trip.SalesPrice</del></h4>
+                                            </div>
+                                        </div>
+                                    }
+
+                                </div>
+                            </div>
+                            <div id="tab-2" class="tab-content">
+                                <div class="row no-slider">
+                                    @foreach (var trip in Model.NewTrips)
+                                    {
+                                        <div class="product-box">
+                                            <div class="img-wrapper">
+                                                <div class="front">
+                                                    <a asp-action="About" asp-route-id="@trip.Id">
+                                                        <img src="~/images/trip/@trip.Cover"
+                                                             class="img-fluid blur-up lazyload bg-img" alt="">
+                                                    </a>
+                                                </div>
+                                                <div class="cart-info cart-wrap">
+                                                    <a asp-controller="Orders" asp-action="AddToCart" asp-route-tripId="@trip.Id"
+                                                            title="Add to cart">
+                                                        <i class="ti-shopping-cart"></i>
+                                                    </a> <a href="javascript:void(0)" title="Add to Wishlist">
+                                                        <i class="ti-heart" aria-hidden="true"></i>
+                                                    </a> <a href="#"
+                                                            data-toggle="modal" data-target="#quick-view"
+                                                            title="Quick View">
+                                                        <i class="ti-search"
+                                                           aria-hidden="true"></i>
+                                                    </a> <a href="compare.html"
+                                                            title="Compare">
+                                                        <i class="ti-reload"
+                                                           aria-hidden="true"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="details-product">
+                                                <a asp-action="About" asp-route-id="@trip.Id">
+                                                    <h6 class="text-light">@trip.Name</h6>
+                                                </a>
+                                                <h4 class="text-light">$@trip.PurchesPrice <del class="text-danger">$@trip.SalesPrice</del></h4>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                            <div id="tab-3" class="tab-content">
+                                <div class="row no-slider">
+                                    @foreach (var trip in Model.SpecialTrips)
+                                    {
+                                        <div class="product-box">
+                                            <div class="img-wrapper">
+                                                <div class="front">
+                                                    <a asp-action="About" asp-route-id="@trip.Id">
+                                                        <img src="~/images/trip/@trip.Cover"
+                                                             class="img-fluid blur-up lazyload bg-img" alt="">
+                                                    </a>
+                                                </div>
+                                                <div class="cart-info cart-wrap ">
+                                                    <a asp-controller="Orders" asp-action="AddToCart" asp-route-tripId="@trip.Id"
+                                                            title="Add to cart">
+                                                        <i class="ti-shopping-cart"></i>
+                                                    </a> <a href="javascript:void(0)" title="Add to Wishlist">
+                                                        <i class="ti-heart" aria-hidden="true"></i>
+                                                    </a> <a href="#"
+                                                            data-toggle="modal" data-target="#quick-view"
+                                                            title="Quick View">
+                                                        <i class="ti-search"
+                                                           aria-hidden="true"></i>
+                                                    </a> <a href="compare.html"
+                                                            title="Compare">
+                                                        <i class="ti-reload"
+                                                           aria-hidden="true"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="details-product">
+                                                <a asp-action="About" asp-route-id="@trip.Id">
+                                                    <h6 class="text-light">@trip.Name</h6>
+                                                </a>
+                                                <h4 class="text-light">$@trip.PurchesPrice <del class="text-danger">$@trip.SalesPrice</del></h4>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- slider tab end -->
+
+
+</div>
